@@ -3,18 +3,20 @@ import "../index.css";
 
 import { useDispatch } from "react-redux";
 import { add } from "../store/cartSlice";
+import { fetchProducts } from "../store/productSlice";
 
 const Products = () => {
     const dispatch = useDispatch();
     const [products, setProducts] = useState([]);
     useEffect(() => {
-        const fetchProducts = async () => {
-            const res = await fetch("https://fakestoreapi.com/products");
-            const data = await res.json();
-            console.log(data);
-            setProducts(data);
-        };
-        fetchProducts();
+        dispatch(fetchProducts()); // here if we want to pass props here then we can use that inside fetchProducts() also
+        // const fetchProducts = async () => {
+        //     const res = await fetch("https://fakestoreapi.com/products");
+        //     const data = await res.json();
+        //     console.log(data);
+        //     setProducts(data);
+        // };
+        // fetchProducts();
     }, []);
 
     const handleAdd = (product) => {
